@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="backend/src/Inventario.Application/Inventario.Application.csproj" Id="eaff4e6d-35f0-40d7-b8ee-5fda083caf8e" />
+  <Project Path="backend/src/Inventario.Domain/Inventario.Domain.csproj" Id="c78fb137-f241-4fef-815c-51a851a47851" />
+  <Project Path="backend/src/Inventario.Infrastructure/Inventario.Infrastructure.csproj" />
+  <Project Path="backend/src/Inventario.Presentation/Inventario.Presentation.csproj" />
+</Solution>

@@ -1,0 +1,68 @@
+name: inventario-ccl
+
+services:
+
+  postgres:
+    image: postgres:17.11
+
+    environment:
+      POSTGRES_DB: inventario
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Falta POSTGRES_PASSWORD}
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:?Falta APP_DB_PASSWORD}
+      SEED_ADMIN_PASSWORD: ${SEED_ADMIN_PASSWORD:?Falta SEED_ADMIN_PASSWORD}
+      TZ: UTC
+      PGTZ: UTC
+
+    ports:
+      - "127.0.0.1:5433:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - pg_isready -U postgres -d inventario
+      interval: 5s
+      timeout: 3s
+      retries: 15
+      start_period: 10s
+
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:5000
+
+      ConnectionStrings__Inventario: "Host=postgres;Port=5432;Database=inventario;Username=inventario_app;Password=${APP_DB_PASSWORD:?Falta APP_DB_PASSWORD}"
+
+      Jwt__Secret: ${JWT_SECRET:?Falta JWT_SECRET}
+
+    ports:
+      - "127.0.0.1:5000:5000"
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    ports:
+      - "127.0.0.1:4200:80"
+
+    depends_on:
+      - api
+
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
