@@ -1,0 +1,103 @@
+    .dashboard-heading { display: flex; justify-content: space-between; margin-bottom: 20px; }
+    .dashboard-heading h1 { margin-bottom: 6px; }
+    .dashboard-heading p, .chart-header p { margin: 0; color: #61708a; font-size: .88rem; }
+    .summary-cards { margin-bottom: 22px; }
+    .summary-card { display: flex; flex-direction: column; gap: 9px; border-top: 3px solid #00449e; }
+    .summary-card strong { color: #141d38; font-size: clamp(1.65rem, 2vw, 2.25rem); }
+    .summary-card small { color: #63718a; }
+    .summary-card.warning-card { border-top-color: #dc9136; }
+    .charts-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(280px, 1fr); gap: 20px; margin-bottom: 22px; }
+    .chart-card { min-width: 0; }
+    .chart-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; margin-bottom: 22px; }
+    .chart-header h2, .history-card h2 { margin: 0 0 7px; }
+    .legend { display: flex; flex-wrap: wrap; gap: 13px; font-size: .82rem; color: #59667b; }
+    .legend span, .stat-line span { display: inline-flex; gap: 7px; align-items: center; }
+    .legend-dot { width: 10px; height: 10px; display: inline-block; border-radius: 3px; }
+    .legend-dot.entry { background: #00449e; }
+    .legend-dot.exit { background: #60c659; }
+    .bar-chart { display: flex; gap: 10px; align-items: flex-end; justify-content: space-around; min-height: 230px; border-bottom: 1px solid #dce4f0; padding: 8px 0 0; }
+    .month-group { display: flex; flex: 1; min-width: 36px; align-items: center; flex-direction: column; gap: 3px; }
+    .bar-pair { height: 180px; width: 100%; display: flex; justify-content: center; align-items: flex-end; gap: 5px; }
+    .bar-track { width: min(22px, 35%); height: 100%; display: flex; flex-direction: column; justify-content: flex-end; }
+    .bar { width: 100%; min-height: 0; border-radius: 6px 6px 0 0; transition: height .2s ease; }
+    .entry-bar { background: #00449e; }
+    .exit-bar { background: #60c659; }
+    .month-label { margin-top: 7px; color: #253653; font-weight: 600; font-size: .83rem; }
+    .month-year { color: #758097; font-size: .73rem; }
+    .donut-layout { display: flex; align-items: center; justify-content: center; gap: 24px; min-height: 215px; }
+    .donut { width: 170px; height: 170px; flex: 0 0 170px; border-radius: 50%; display: grid; place-items: center; }
+    .donut-hole { width: 115px; height: 115px; border-radius: 50%; background: #fff; display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 4px; }
+    .donut-hole strong { color: #141d38; font-size: 2rem; }
+    .donut-hole span { font-size: .74rem; color: #66758c; }
+    .donut-stats { flex: 1; min-width: 125px; }
+    .stat-line { display: flex; justify-content: space-between; gap: 14px; padding: 10px 0; border-bottom: 1px solid #e5eaf2; }
+    .stat-line strong { color: #141d38; }
+    .chart-note { color: #697890; font-size: .78rem; line-height: 1.5; margin-top: 15px; }
+    @media (max-width: 950px) {
+      .charts-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      .donut-layout { flex-direction: column; }
+      .donut-stats { width: 100%; }
+      .bar-chart { gap: 3px; }
+      .bar-pair { gap: 2px; }
+    }
+
+/* ==========================================================
+   9. DASHBOARD
+========================================================== */
+
+.cards {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(210px, 1fr));
+
+  gap: 16px;
+}
+
+.cards .card {
+  position: relative;
+
+  display: grid;
+  gap: 10px;
+
+  min-height: 125px;
+  margin: 0;
+
+  padding: 22px;
+
+  border-top: 4px solid var(--ccl-blue);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cards .card:nth-child(4n + 2),
+.cards .card:nth-child(4n + 4) {
+  border-top-color: var(--ccl-green);
+}
+
+.cards .card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 17px 36px rgba(20, 29, 56, 0.12);
+}
+
+.cards .card span {
+  color: var(--ccl-muted);
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cards strong {
+  color: var(--ccl-blue);
+
+  font-size: 30px;
+  font-weight: 800;
+
+  letter-spacing: -1px;
+}

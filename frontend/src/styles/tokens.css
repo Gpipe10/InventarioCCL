@@ -1,0 +1,33 @@
+/* ==========================================================
+   1. VARIABLES Y TIPOGRAFÍA
+========================================================== */
+
+:root {
+  color-scheme: light;
+
+  --ccl-blue: #00449e;
+  --ccl-blue-hover: #003676;
+  --ccl-blue-light: #eaf1fa;
+
+  --ccl-navy: #141d38;
+  --ccl-green: #60c659;
+
+  --ccl-white: #ffffff;
+  --ccl-background: #f5f7fa;
+
+  --ccl-border: #dce4ee;
+  --ccl-muted: #64748b;
+
+  --ccl-shadow:
+    0 12px 32px rgba(20, 29, 56, 0.07);
+
+  --ccl-font:
+    "Segoe UI",
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-family: var(--ccl-font);
+  color: var(--ccl-navy);
+  background: var(--ccl-background);
+}

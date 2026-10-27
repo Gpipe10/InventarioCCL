@@ -1,0 +1,163 @@
+    <h1>Productos</h1>
+
+    <section class="card filters">
+      <label>
+        Buscar producto
+        <input
+          [(ngModel)]="busqueda"
+          (keyup.enter)="buscar()"
+          placeholder="SKU o nombre" />
+      </label>
+
+      <button type="button" (click)="buscar()">Buscar</button>
+
+      @if (auth.isAdmin()) {
+        <button type="button" class="secondary" (click)="nuevo()">
+          Nuevo producto
+        </button>
+      }
+    </section>
+
+    <app-feedback [message]="mensaje" [error]="esError" />
+
+    @if (cargando) {
+      <p>Cargando productos…</p>
+    }
+
+    <section class="card table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>SKU</th>
+            <th>Nombre</th>
+            <th>Precio (COP)</th>
+            <th>Stock</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (producto of pagina?.items ?? []; track producto.id) {
+            <tr>
+              <td>{{ producto.sku }}</td>
+              <td>{{ producto.nombre }}</td>
+              <td>{{ formatearCOP(producto.precio) }}</td>
+              <td>{{ producto.stock | number:'1.0-2' }}</td>
+              <td>{{ producto.activo ? 'Activo' : 'Inactivo' }}</td>
+              <td>
+                @if (auth.isAdmin()) {
+                  <button
+                    type="button"
+                    class="small"
+                    (click)="editar(producto)">
+                    Editar
+                  </button>
+                  <button
+                    type="button"
+                    class="small secondary"
+                    [disabled]="actualizandoEstadoId === producto.id"
+                    (click)="estado(producto)">
+                    {{ actualizandoEstadoId === producto.id
+                        ? 'Actualizando…'
+                        : (producto.activo ? 'Desactivar' : 'Activar') }}
+                  </button>
+                  <button
+                    type="button"
+                    class="small secondary"
+                    [disabled]="eliminandoId !== null || actualizandoEstadoId !== null"
+                    (click)="eliminar(producto)">
+                    {{ eliminandoId === producto.id ? 'Eliminando…' : 'Eliminar' }}
+                  </button>
+                }
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6">No hay productos.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </section>
+
+    <div class="pagination">
+      <button
+        type="button"
+        class="secondary"
+        [disabled]="numero <= 1 || cargando"
+        (click)="ir(numero - 1)">
+        Anterior
+      </button>
+      <span>Página {{ numero }} · {{ pagina?.total ?? 0 }} registros</span>
+      <button
+        type="button"
+        class="secondary"
+        [disabled]="!pagina || cargando || numero * 20 >= pagina.total"
+        (click)="ir(numero + 1)">
+        Siguiente
+      </button>
+    </div>
+
+    @if (editando) {
+      <section class="card" #editorPanel>
+        <h2>{{ editId !== null ? 'Editar producto' : 'Nuevo producto' }}</h2>
+        <form #form="ngForm" class="grid-form" (ngSubmit)="guardar(form)">
+          <label>
+            SKU
+            <input name="sku" [(ngModel)]="datos.sku" required maxlength="50" />
+          </label>
+          <label>
+            Nombre
+            <input name="nombre" [(ngModel)]="datos.nombre" required maxlength="150" />
+          </label>
+          <label>
+            Descripción
+            <input name="descripcion" [(ngModel)]="datos.descripcion" />
+          </label>
+          <label>
+            Categoría
+            <select name="categoriaId" [(ngModel)]="datos.categoriaId" required>
+              <option [ngValue]="0" disabled>Selecciona una categoría</option>
+              @for (categoria of categorias; track categoria.id) {
+                <option [ngValue]="categoria.id">{{ categoria.nombre }}</option>
+              }
+            </select>
+          </label>
+          <label>
+            Unidad de medida
+            <select name="unidadMedida" [(ngModel)]="datos.unidadMedida" [disabled]="editId !== null">
+              <option [ngValue]="1">Unidad</option>
+              <option [ngValue]="2">Kg</option>
+              <option [ngValue]="3">Litro</option>
+              <option [ngValue]="4">Metro</option>
+            </select>
+          </label>
+          <label>
+            Precio (COP)
+            <input
+              type="number"
+              name="precio"
+              [(ngModel)]="datos.precio"
+              required min="50" step="1" />
+          </label>
+          <label>
+            Stock mínimo
+            <input
+              type="number"
+              name="stockMinimo"
+              [(ngModel)]="datos.stockMinimo"
+              required min="0" step="0.01" />
+          </label>
+          <div class="actions">
+            <button
+              type="submit"
+              [disabled]="form.invalid || !datos.categoriaId || datos.precio < 50 || guardando">
+              {{ guardando ? 'Guardando…' : 'Guardar' }}
+            </button>
+            <button type="button" class="secondary" (click)="cancelar()">
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </section>
+    }

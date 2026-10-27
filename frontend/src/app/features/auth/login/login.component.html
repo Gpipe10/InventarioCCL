@@ -1,0 +1,232 @@
+    <div class="login-page">
+
+      <div class="login-container">
+
+        <!-- PANEL INSTITUCIONAL -->
+        <section class="login-brand">
+
+          <div class="brand-header">
+
+            <div class="brand-logo">
+              <span>CCL</span>
+            </div>
+
+            <div class="brand-information">
+              <span class="brand-name">
+                Corporación Colombiana
+                de Logística
+              </span>
+
+              <span class="brand-description">
+                Sistema de gestión empresarial
+              </span>
+            </div>
+
+          </div>
+
+          <div class="brand-content">
+
+            <div class="brand-badge">
+              SISTEMA DE INVENTARIO
+            </div>
+
+            <h1>
+              Gestión inteligente
+              de inventarios.
+            </h1>
+
+            <p>
+              Administra productos, controla existencias
+              y registra movimientos de inventario
+              desde un solo lugar.
+            </p>
+
+            <div class="brand-features">
+
+              <div class="feature">
+                <span class="feature-icon">✓</span>
+                <span>Control de productos</span>
+              </div>
+
+              <div class="feature">
+                <span class="feature-icon">✓</span>
+                <span>Entradas y salidas</span>
+              </div>
+
+              <div class="feature">
+                <span class="feature-icon">✓</span>
+                <span>Inventario en tiempo real</span>
+              </div>
+
+              <div class="feature">
+                <span class="feature-icon">✓</span>
+                <span>Seguimiento de movimientos</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="brand-footer">
+            Corporación Colombiana de Logística
+          </div>
+
+        </section>
+
+        <!-- FORMULARIO DE AUTENTICACIÓN -->
+        <section class="login-form-panel">
+
+          <div class="form-content">
+
+            <div class="form-icon">
+              <svg
+                viewBox="0 0 24 24"
+                width="27"
+                height="27"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                aria-hidden="true">
+
+                <rect
+                  x="5"
+                  y="10"
+                  width="14"
+                  height="11"
+                  rx="2" />
+
+                <path
+                  d="M8 10V7a4 4 0 0 1 8 0v3" />
+
+                <path d="M12 14v3" />
+
+              </svg>
+            </div>
+
+            <div class="form-heading">
+
+              <span class="form-eyebrow">
+                BIENVENIDO
+              </span>
+
+              <h2>Iniciar sesión</h2>
+
+              <p>
+                Ingresa tus credenciales para acceder
+                al sistema de inventario.
+              </p>
+
+            </div>
+
+            <form
+              #form="ngForm"
+              (ngSubmit)="entrar(form)"
+              novalidate>
+
+              <!-- CORREO -->
+              <div class="form-group">
+
+                <label for="email">
+                  Correo electrónico
+                </label>
+
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="usuario@empresa.com"
+                  autocomplete="username"
+                  [(ngModel)]="email"
+                  required
+                  email />
+
+              </div>
+
+              <!-- CONTRASEÑA -->
+              <div class="form-group">
+
+                <label for="password">
+                  Contraseña
+                </label>
+
+                <div class="password-wrapper">
+
+                  <input
+                    id="password"
+                    name="password"
+                    [type]="mostrarPassword ? 'text' : 'password'"
+                    placeholder="Ingresa tu contraseña"
+                    autocomplete="current-password"
+                    [(ngModel)]="password"
+                    required />
+
+                  <button
+                    type="button"
+                    class="toggle-password"
+                    (click)="mostrarPassword = !mostrarPassword"
+                    [attr.aria-label]="
+                      mostrarPassword
+                        ? 'Ocultar contraseña'
+                        : 'Mostrar contraseña'
+                    ">
+
+                    {{ mostrarPassword ? 'Ocultar' : 'Mostrar' }}
+
+                  </button>
+
+                </div>
+
+              </div>
+
+              <!-- MENSAJES -->
+              <app-feedback
+                [message]="error" />
+
+              <!-- BOTÓN -->
+              <button
+                type="submit"
+                class="login-button"
+                [disabled]="form.invalid || enviando">
+
+                @if (enviando) {
+
+                  <span class="spinner"></span>
+                  Ingresando...
+
+                } @else {
+
+                  Ingresar al sistema
+
+                  <span class="button-arrow">→</span>
+
+                }
+
+              </button>
+
+            </form>
+
+            <div class="form-security">
+
+              <span class="security-icon">●</span>
+
+              Acceso exclusivo para usuarios autorizados
+
+            </div>
+
+          </div>
+
+          <div class="form-footer">
+
+            Inventario CCL
+
+            <span>·</span>
+
+            Sistema de gestión de inventarios
+
+          </div>
+
+        </section>
+
+      </div>
+
+    </div>

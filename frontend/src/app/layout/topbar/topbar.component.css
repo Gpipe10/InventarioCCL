@@ -1,0 +1,238 @@
+:host {
+  display: block;
+}
+
+/* ==========================================================
+   3. ENCABEZADO PRINCIPAL
+========================================================== */
+
+.topbar {
+  position: relative;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  width: 100%;
+  min-height: 74px;
+
+  padding: 10px clamp(18px, 4vw, 65px);
+
+  background: var(--ccl-white);
+
+  border-bottom: 1px solid var(--ccl-border);
+
+  box-shadow:
+    0 2px 12px rgba(20, 29, 56, 0.035);
+}
+
+/* ==========================================================
+   4. LOGO E IDENTIDAD CORPORATIVA
+========================================================== */
+
+.app-brand {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 14px;
+
+  flex-shrink: 0;
+
+  color: var(--ccl-navy);
+  text-decoration: none;
+}
+
+.app-brand:hover {
+  color: var(--ccl-navy);
+  text-decoration: none;
+}
+
+.app-brand-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 76px;
+  height: 55px;
+
+  padding: 4px;
+
+  border-radius: 9px;
+
+  background: var(--ccl-white);
+}
+
+.app-brand-logo img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+.app-brand-text {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.app-brand-text strong {
+  color: var(--ccl-navy);
+
+  font-family: var(--ccl-font);
+  font-size: 18px;
+  font-weight: 800;
+
+  line-height: 1.2;
+}
+
+.app-brand-text small {
+  color: var(--ccl-muted);
+
+  font-family: var(--ccl-font);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* ==========================================================
+   5. NAVEGACIÓN
+========================================================== */
+
+.topbar nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  flex: 1;
+  min-width: 0;
+}
+
+.topbar nav a {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 10px 12px;
+
+  border-radius: 8px;
+
+  color: #34425a;
+
+  font-family: var(--ccl-font);
+  font-size: 13px;
+  font-weight: 600;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.topbar nav a:hover {
+  background: #f1f5fc;
+  color: var(--ccl-blue);
+}
+
+.topbar nav a.active {
+  background: #e9f1fc;
+  color: var(--ccl-blue);
+
+  box-shadow:
+    inset 0 -3px 0 var(--ccl-green);
+}
+
+/* ==========================================================
+   6. USUARIO AUTENTICADO
+========================================================== */
+
+.app-user {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+}
+
+.app-user-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 50%;
+
+  background: var(--ccl-blue-light);
+  color: var(--ccl-blue);
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.app-user-name {
+  color: #34425a;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.app-logout {
+  padding: 9px 13px;
+
+  background: #eef3fa;
+  color: var(--ccl-blue);
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.app-logout:hover:not(:disabled) {
+  background: #dce9f8;
+  color: var(--ccl-blue-hover);
+}
+
+/* ==========================================
+   LOGO CORPORATIVO CCL
+========================================== */
+
+.app-brand-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 110px;
+  height: 68px;
+
+  flex-shrink: 0;
+
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.app-brand-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ==========================================
+   LOGO RESPONSIVE
+========================================== */
+
+@media (max-width: 480px) {
+  .app-brand-logo {
+    width: 85px;
+    height: 54px;
+  }
+}

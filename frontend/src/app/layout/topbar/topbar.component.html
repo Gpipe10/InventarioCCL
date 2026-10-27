@@ -1,0 +1,85 @@
+<header class="topbar">
+
+  <a
+    class="app-brand"
+    routerLink="/"
+    aria-label="Sistema de inventario - Inicio">
+
+    <span class="app-brand-logo">
+      <img
+        src="/images/logo.png"
+        alt="Corporación Colombiana de Logística" />
+    </span>
+
+    <span class="app-brand-text">
+      <strong>Sistema de inventario</strong>
+      <small>Control y gestión de existencias</small>
+    </span>
+
+  </a>
+
+  @if (auth.usuario()) {
+
+    <nav aria-label="Navegación principal">
+
+      <a
+        routerLink="/"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="active">
+        Panel
+      </a>
+
+      <a
+        routerLink="/productos"
+        routerLinkActive="active">
+        Productos
+      </a>
+
+      <a
+        routerLink="/movimientos"
+        routerLinkActive="active">
+        Movimientos
+      </a>
+
+      <a
+        routerLink="/inventario"
+        routerLinkActive="active">
+        Inventario
+      </a>
+
+      <a
+        routerLink="/kardex"
+        routerLinkActive="active">
+        Kardex
+      </a>
+
+    </nav>
+
+    <div class="app-user">
+
+      <span
+        class="app-user-avatar"
+        aria-hidden="true">
+        {{
+          (auth.usuario()?.nombre || 'U')
+            .charAt(0)
+            .toUpperCase()
+        }}
+      </span>
+
+      <span class="app-user-name">
+        {{ auth.usuario()?.nombre }}
+      </span>
+
+    </div>
+
+    <button
+      type="button"
+      class="app-logout"
+      (click)="salir()">
+      Cerrar sesión
+    </button>
+
+  }
+
+</header>
