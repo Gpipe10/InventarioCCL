@@ -1,0 +1,60 @@
+/* ==========================================================
+   2. ESTILOS GLOBALES
+========================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  font-family: var(--ccl-font);
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+
+  background: var(--ccl-background);
+  color: var(--ccl-navy);
+
+  font-family: var(--ccl-font);
+  font-size: 14px;
+  line-height: 1.5;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+select,
+textarea,
+option {
+  font-family: var(--ccl-font);
+}
+
+a {
+  font-family: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--ccl-font);
+  color: var(--ccl-navy);
+}
+
+p,
+span,
+label,
+strong,
+small {
+  font-family: inherit;
+}

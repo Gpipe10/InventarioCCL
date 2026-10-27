@@ -9,8 +9,8 @@ import { ExportService } from '../../core/services/export.service';
 import { FeedbackComponent } from '../../shared/components/feedback/feedback.component';
 import { ProductosService } from '../productos/productos.service';
 
-import { KardexRow } from './inventario.model';
-import { InventarioService } from './inventario.service';
+import { KardexRow } from '../inventario/inventario.model';
+import { InventarioService } from '../inventario/inventario.service';
 
 @Component({
   selector: 'app-kardex',
@@ -21,135 +21,8 @@ import { InventarioService } from './inventario.service';
     FormsModule,
     FeedbackComponent,
   ],
-  template: `
-    <h1>Kardex de movimientos</h1>
-
-    <section class="card filters">
-
-      <label>
-        SKU producto
-        <input
-          type="text"
-          [(ngModel)]="skuProducto"
-          (keyup.enter)="buscar()"
-          placeholder="SKU del producto" />
-      </label>
-
-      <label>
-        Tipo
-        <select [(ngModel)]="tipo">
-          <option value="">Todos</option>
-          <option value="1">Entradas</option>
-          <option value="2">Salidas</option>
-        </select>
-      </label>
-
-      <label>
-        Desde
-        <input
-          type="date"
-          [(ngModel)]="desde" />
-      </label>
-
-      <label>
-        Hasta
-        <input
-          type="date"
-          [(ngModel)]="hasta" />
-      </label>
-
-      <button
-        type="button"
-        [disabled]="cargando || exportando"
-        (click)="buscar()">
-        Consultar
-      </button>
-
-      <button
-        type="button"
-        class="secondary"
-        [disabled]="exportando || cargando"
-        (click)="exportar()">
-        {{ exportando ? 'Preparando archivo…' : 'Exportar CSV' }}
-      </button>
-
-    </section>
-
-    <app-feedback [message]="error" />
-
-    @if (cargando) {
-      <p>Cargando kardex…</p>
-    }
-
-    <section class="card table-wrap">
-
-      <table>
-        <thead>
-          <tr>
-            <th>Fecha</th>
-            <th>Producto</th>
-            <th>Tipo</th>
-            <th>Cantidad</th>
-            <th>Costo</th>
-            <th>Valor</th>
-            <th>Stock final</th>
-            <th>Referencia</th>
-            <th>Usuario</th>
-          </tr>
-        </thead>
-
-        <tbody>
-
-          @for (movimiento of pagina?.items ?? []; track movimiento.movimientoId) {
-
-            <tr>
-              <td>{{ movimiento.fecha | date:'short' }}</td>
-              <td>{{ movimiento.sku }} · {{ movimiento.producto }}</td>
-              <td>{{ movimiento.tipo === 1 ? 'Entrada' : 'Salida' }}</td>
-              <td>{{ movimiento.cantidad | number:'1.0-2' }}</td>
-              <td>{{ movimiento.costoUnitario | number:'1.2-2' }}</td>
-              <td>{{ movimiento.valor | number:'1.2-2' }}</td>
-              <td>{{ movimiento.stockResultante | number:'1.0-2' }}</td>
-              <td>{{ movimiento.referencia || '—' }}</td>
-              <td>{{ movimiento.usuario }}</td>
-            </tr>
-
-          } @empty {
-            <tr>
-              <td colspan="9">Sin movimientos.</td>
-            </tr>
-          }
-
-        </tbody>
-      </table>
-
-    </section>
-
-    <div class="pagination">
-
-      <button
-        type="button"
-        class="secondary"
-        [disabled]="numero <= 1 || cargando"
-        (click)="ir(numero - 1)">
-        Anterior
-      </button>
-
-      <span>
-        Página {{ numero }} ·
-        {{ pagina?.total ?? 0 }} registros
-      </span>
-
-      <button
-        type="button"
-        class="secondary"
-        [disabled]="!pagina || numero * 20 >= pagina.total || cargando"
-        (click)="ir(numero + 1)">
-        Siguiente
-      </button>
-
-    </div>
-  `,
+  templateUrl: './kardex.component.html',
+  styleUrl: './kardex.component.css',
 })
 export class KardexComponent implements OnInit {
 

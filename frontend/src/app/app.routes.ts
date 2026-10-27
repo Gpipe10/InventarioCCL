@@ -83,16 +83,13 @@ export const routes: Routes = [
   // KARDEX
   // ======================================================
 
-  {
-    path: 'kardex',
-
-    canActivate: [authGuard],
-
-    loadComponent: () =>
-      import(
-        './features/inventario/kardex.component'
-      ).then(m => m.KardexComponent),
-  },
+{
+  path: 'kardex',
+  canActivate: [authGuard],
+  loadComponent: () =>
+    import('./features/kardex/kardex.component')
+      .then(m => m.KardexComponent),
+},
 
   // ======================================================
   // RUTAS DESCONOCIDAS

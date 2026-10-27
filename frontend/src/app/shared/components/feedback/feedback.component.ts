@@ -6,18 +6,8 @@ import {
 @Component({
   selector: 'app-feedback',
 
-  template: `
-    @if (message()) {
-      <p
-        role="status"
-        [class.error]="error()"
-        [class.success]="!error()">
-
-        {{ message() }}
-
-      </p>
-    }
-  `,
+  templateUrl: './feedback.component.html',
+  styleUrl: './feedback.component.css',
 })
 export class FeedbackComponent {
 

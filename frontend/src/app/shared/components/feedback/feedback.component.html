@@ -1,0 +1,10 @@
+    @if (message()) {
+      <p
+        role="status"
+        [class.error]="error()"
+        [class.success]="!error()">
+
+        {{ message() }}
+
+      </p>
+    }

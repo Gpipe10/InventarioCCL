@@ -1,0 +1,324 @@
+/* ==========================================================
+   8. TARJETAS
+========================================================== */
+
+.card {
+  margin: 18px 0;
+  padding: 22px;
+
+  border: 1px solid var(--ccl-border);
+  border-radius: 14px;
+
+  background: var(--ccl-white);
+
+  box-shadow: var(--ccl-shadow);
+}
+
+/* ==========================================================
+   10. FORMULARIOS
+========================================================== */
+
+label {
+  display: grid;
+  gap: 6px;
+
+  color: #34425a;
+
+  font-family: var(--ccl-font);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  min-width: 0;
+
+  padding: 11px 12px;
+
+  border: 1px solid #b9c6d8;
+  border-radius: 9px;
+
+  background: var(--ccl-white);
+  color: var(--ccl-navy);
+
+  font-family: var(--ccl-font);
+  font-size: 14px;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8;
+  opacity: 1;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: #849dba;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--ccl-blue);
+
+  box-shadow:
+    0 0 0 3px rgba(0, 68, 158, 0.10);
+
+  outline: none;
+}
+
+/* ==========================================================
+   11. BOTONES
+========================================================== */
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 11px 15px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: var(--ccl-blue);
+  color: var(--ccl-white);
+
+  font-family: var(--ccl-font);
+  font-size: 13px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  background: var(--ccl-blue-hover);
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+button.secondary {
+  background: #eaf1fa;
+  color: var(--ccl-blue);
+}
+
+button.secondary:hover:not(:disabled) {
+  background: #dce9f8;
+}
+
+button.small {
+  padding: 7px 10px;
+  margin: 2px;
+
+  font-size: 12px;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--ccl-green);
+  outline-offset: 2px;
+}
+
+/* ==========================================================
+   12. FILTROS Y FORMULARIOS
+========================================================== */
+
+.filters,
+.actions,
+.pagination,
+.tabs {
+  display: flex;
+  align-items: end;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+}
+
+.filters > input,
+.filters > label {
+  flex: 1;
+  min-width: 170px;
+}
+
+.grid-form {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 16px;
+}
+
+.grid-form .actions {
+  grid-column: 1 / -1;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+}
+
+.check input {
+  width: auto;
+}
+
+/* ==========================================================
+   13. TABLAS
+========================================================== */
+
+.table-wrap {
+  padding: 0;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 700px;
+
+  border-collapse: collapse;
+
+  font-family: var(--ccl-font);
+}
+
+th {
+  background: #eff4fa;
+  color: var(--ccl-navy);
+
+  font-size: 12px;
+  font-weight: 750;
+
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+
+  white-space: nowrap;
+}
+
+th,
+td {
+  padding: 13px 15px;
+
+  border-bottom: 1px solid #e8edf3;
+
+  text-align: left;
+}
+
+tbody tr:hover {
+  background: #f7fbff;
+}
+
+tbody tr.low,
+tbody tr.low:hover {
+  background: #fff5e9;
+}
+
+/* ==========================================================
+   14. PAGINACIÓN
+========================================================== */
+
+.pagination {
+  justify-content: center;
+  align-items: center;
+
+  padding: 18px;
+
+  color: var(--ccl-muted);
+}
+
+/* ==========================================================
+   15. MENSAJES
+========================================================== */
+
+.error,
+.success {
+  padding: 12px 15px;
+
+  border-radius: 9px;
+
+  font-family: var(--ccl-font);
+  font-size: 13px;
+}
+
+.error {
+  background: #fff1ed;
+  color: #9a2e1a;
+
+  border-left: 4px solid #e38465;
+}
+
+.success {
+  background: #eef9ed;
+  color: #236c36;
+
+  border-left: 4px solid var(--ccl-green);
+}
+
+.empty-state {
+  padding: 24px;
+  text-align: center;
+  color: var(--ccl-muted);
+}
+
+/* ==========================================
+   ADAPTACIÓN RESPONSIVE COMPARTIDA
+========================================== */
+.table-wrap { width: 100%; max-width: 100%; }
+
+@media (max-width: 640px) {
+  .card { padding: 16px; }
+  .table-wrap { padding: 0; }
+  .table-wrap::before {
+    content: "Desliza horizontalmente para ver todas las columnas ↔";
+    display: block;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--ccl-border);
+    color: var(--ccl-muted);
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .filters { gap: 12px; }
+  .filters > input, .filters > label, .filters > button {
+    flex: 1 1 100%;
+    min-width: 0;
+    width: 100%;
+  }
+  .grid-form { grid-template-columns: minmax(0, 1fr); }
+  .actions > button { flex: 1 1 100%; }
+}
+@media (max-width: 480px) {
+  .pagination {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+  }
+  .pagination span {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    text-align: center;
+  }
+  .pagination > button { width: 100%; }
+}
