@@ -301,6 +301,8 @@ builder.Services.AddRateLimiter(options =>
                 }));
 });
 
+
+
 // ======================================================
 // 15. CORS — FRONTEND ANGULAR
 // ======================================================
@@ -313,13 +315,11 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("frontend", policy =>
     {
-        if (origins.Length > 0)
-        {
-            policy.WithOrigins(origins)
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials();
-        }
+        policy
+            .WithOrigins(origins)
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
     });
 });
 
