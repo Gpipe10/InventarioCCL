@@ -1,4 +1,9 @@
-import { Component, inject } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  inject
+} from '@angular/core';
+
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -21,6 +26,7 @@ export class LoginComponent {
   private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
   private readonly apiError = inject(ApiErrorService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   email = '';
   password = '';
@@ -30,31 +36,35 @@ export class LoginComponent {
   enviando = false;
   error = '';
 
-  entrar(form: NgForm): void {
+entrar(form: NgForm): void {
 
-    if (form.invalid || this.enviando) {
-      return;
-    }
-
-    this.error = '';
-    this.enviando = true;
-
-    this.auth.login(
-      this.email,
-      this.password
-    ).subscribe({
-
-      next: () => {
-        this.enviando = false;
-        this.password = '';
-
-        void this.router.navigateByUrl('/');
-      },
-
-      error: error => {
-        this.error = this.apiError.obtenerMensaje(error);
-        this.enviando = false;
-      },
-    });
+  if (form.invalid || this.enviando) {
+    return;
   }
+
+  this.error = '';
+  this.enviando = true;
+
+  this.auth.login(
+    this.email,
+    this.password
+  ).subscribe({
+
+    next: () => {
+      this.enviando = false;
+      this.password = '';
+
+      this.cdr.markForCheck();
+
+      void this.router.navigateByUrl('/');
+    },
+
+    error: error => {
+      this.error = this.apiError.obtenerMensaje(error);
+      this.enviando = false;
+
+      this.cdr.markForCheck();
+    }
+  });
+}
 }

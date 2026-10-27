@@ -34,3 +34,12 @@ h2 {
 p {
   color: var(--ccl-muted);
 }
+
+/* Espacio adaptable sin provocar desplazamiento horizontal de toda la página. */
+.container { min-width: 0; }
+@media (max-width: 768px) {
+  .container { margin: 20px auto; padding: 0 16px 32px; }
+}
+@media (max-width: 480px) {
+  .container { margin: 16px auto; padding: 0 12px 26px; }
+}
